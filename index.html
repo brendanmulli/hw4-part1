@@ -1,0 +1,69 @@
+<!--
+Brendan Mulligan, UMass Lowell Computer Science, brendan_mulligan@student.uml.edu
+Copyright (c) 2025 by Brendan. All rights reserved. May be freely copied or
+excerpted for educational purposes with credit to the author.
+-->
+<!DOCTYPE html>
+<!-- Declares this is an HTML5 document -->
+<html lang="en">
+<!-- Root element with language set to English -->
+<head>
+    <!-- Document metadata and resources -->
+    <meta charset="UTF-8"> <!-- Character encoding for Unicode support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile-responsive settings -->
+    <link rel="stylesheet" href="styles.css"> <!-- Links to external CSS file -->
+    <title>Interactive Multiplication Table</title> <!-- Page title in browser tab -->
+</head>
+<body>
+    <!-- Main content of the webpage -->
+    <main class="app-container">
+        <!-- Primary heading -->
+        <h1 class="app-title">Multiplication Table Generator</h1>
+        
+        <!-- Form for user input -->
+        <form id="multiplicationForm" class="input-form">
+            <!-- Input group for row range -->
+            <div class="input-group">
+                <label for="rowStart">Row Start Value:</label>
+                <input type="number" id="rowStart" name="rowStart" required> <!-- Number input field -->
+            </div>
+            
+            <div class="input-group">
+                <label for="rowEnd">Row End Value:</label>
+                <input type="number" id="rowEnd" name="rowEnd" required>
+            </div>
+            
+            <!-- Input group for column range -->
+            <div class="input-group">
+                <label for="columnStart">Column Start Value:</label>
+                <input type="number" id="columnStart" name="columnStart" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="columnEnd">Column End Value:</label>
+                <input type="number" id="columnEnd" name="columnEnd" required>
+            </div>
+            
+            <!-- Form submission button -->
+            <button type="submit" class="generate-btn">Generate Table</button>
+        </form>
+        
+        <!-- Container for error messages (initially empty) -->
+        <div id="errorDisplay" class="error-message" aria-live="polite"></div>
+        
+        <!-- Scrollable container for the generated table -->
+        <div class="table-viewport">
+            <!-- Dynamic content will be inserted here by JavaScript -->
+            <div id="tableOutput">
+                <!-- Table will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- jQuery and jQuery Validation libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <!-- Links to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
