@@ -1,14 +1,32 @@
-/*
-Brendan Mulligan, UMass Lowell Computer Science, brendan_mulligan@student.uml.edu
-Copyright (c) 2025 by Brendan. All rights reserved. May be freely copied or
-excerpted for educational purposes with credit to the author.
-*/
-
 // Wait for the DOM to be fully loaded before initializing the app
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 // Main function that sets up the application
 function initializeApp() {
+    // Custom validation method for less than or equal (works with negatives)
+    $.validator.addMethod("lessThanOrEqual", function(value, element, param) {
+        var target = $(param);
+        if (this.settings.onfocusout && target.val() !== "") {
+            target.unbind(".validate-lessThanOrEqual").bind("blur.validate-lessThanOrEqual", function() {
+                $(element).valid();
+            });
+        }
+        if (value === "" || target.val() === "") return true;
+        return parseFloat(value) <= parseFloat(target.val());
+    }, "Must be less than or equal to the other field");
+
+    // Custom validation method for greater than or equal (works with negatives)
+    $.validator.addMethod("greaterThanOrEqual", function(value, element, param) {
+        var target = $(param);
+        if (this.settings.onfocusout && target.val() !== "") {
+            target.unbind(".validate-greaterThanOrEqual").bind("blur.validate-greaterThanOrEqual", function() {
+                $(element).valid();
+            });
+        }
+        if (value === "" || target.val() === "") return true;
+        return parseFloat(value) >= parseFloat(target.val());
+    }, "Must be greater than or equal to the other field");
+
     // Initialize jQuery Validation
     $('#multiplicationForm').validate({
         rules: {
@@ -79,28 +97,6 @@ function initializeApp() {
             handleValidForm();
         }
     });
-
-    // Custom validation method for less than or equal
-    $.validator.addMethod("lessThanOrEqual", function(value, element, param) {
-        var target = $(param);
-        if (this.settings.onfocusout) {
-            target.unbind(".validate-lessThanOrEqual").bind("blur.validate-lessThanOrEqual", function() {
-                $(element).valid();
-            });
-        }
-        return value <= target.val();
-    }, "Must be less than or equal to the other field");
-
-    // Custom validation method for greater than or equal
-    $.validator.addMethod("greaterThanOrEqual", function(value, element, param) {
-        var target = $(param);
-        if (this.settings.onfocusout) {
-            target.unbind(".validate-greaterThanOrEqual").bind("blur.validate-greaterThanOrEqual", function() {
-                $(element).valid();
-            });
-        }
-        return value >= target.val();
-    }, "Must be greater than or equal to the other field");
 
     // Get references to key DOM elements
     const errorDisplay = document.getElementById('errorDisplay');
